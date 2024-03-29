@@ -7,7 +7,7 @@
 <style>
     /* Обновленный стиль */
     .calculator {
-        width: 400px;
+        width: 500px;
         margin: 0 auto;
         font-family: Arial, sans-serif;
         font-size: 16px;
@@ -18,6 +18,7 @@
     }
     label {
         white-space: nowrap;
+        display: block;
     }
 </style>
 </head>
@@ -28,13 +29,14 @@
     <input type="number" id="area" value="1">
     <button onclick="decrement()">-</button>
     <button onclick="increment()">+</button>
-    <br>
+    <br><br>
     <label>Выберите тип:</label>
-    <input type="radio" name="type" value="economy">Эконом (работы)
-    <input type="radio" name="type" value="standard" onchange="calculateTotal()">Стандарт (работы, черновые и чистовые материалы)
-    <input type="radio" name="type" value="comfort" onchange="calculateTotal()">Комфорт (работы, черновые и чистовые материалы)
-    <input type="radio" name="type" value="technical" onchange="calculateTotal()">Технический дизайн-проект
-    <input type="radio" name="type" value="full" onchange="calculateTotal()">Полноценный дизайн-проект
+    <br>
+    <input type="radio" name="type" value="economy">Эконом (работы)<br>
+    <input type="radio" name="type" value="standard" onchange="calculateTotal()">Стандарт (работы, черновые и чистовые материалы)<br>
+    <input type="radio" name="type" value="comfort" onchange="calculateTotal()">Комфорт (работы, черновые и чистовые материалы)<br>
+    <input type="radio" name="type" value="technical" onchange="calculateTotal()">Технический дизайн-проект<br>
+    <input type="radio" name="type" value="full" onchange="calculateTotal()">Полноценный дизайн-проект<br>
     <br>
     <label for="total">Итого:</label>
     <span id="total">0 рублей</span>
