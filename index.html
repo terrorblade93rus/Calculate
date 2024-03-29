@@ -26,7 +26,7 @@
 
 <div class="calculator">
     <label for="area">Введите площадь Вашей квартиры:</label>
-    <input type="text" id="area" value=" " oninput="calculateTotal()">
+    <input type="text" id="area" value="" oninput="calculateTotal()">
     <br><br>
     <label>Выберите тип:</label>
     <br>
@@ -43,6 +43,9 @@
 <script>
     function calculateTotal() {
         var area = parseFloat(document.getElementById("area").value);
+        if (isNaN(area)) {
+            area = 0; // Установка значения по умолчанию, если поле пустое или содержит нечисловое значение
+        }
         var type = document.querySelector('input[name="type"]:checked').value;
         var total = 0;
 
