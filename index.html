@@ -5,89 +5,85 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Калькулятор</title>
 <style>
-    body {
+    /* простой стиль для визуализации */
+    .calculator {
+        width: 300px;
+        margin: 0 auto;
         font-family: Arial, sans-serif;
     }
-    .calculator {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    .input-group {
-        margin-bottom: 10px;
-    }
-    .input-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
-    .input-group input {
-        width: calc(100% - 10px);
-        padding: 5px;
-        margin-bottom: 5px;
-    }
-    .buttons {
-        display: flex;
-        justify-content: space-between;
-    }
-    .buttons button {
-        width: 48%;
-        padding: 10px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    #result {
-        margin-top: 10px;
-        font-weight: bold;
+    input[type="number"] {
+        width: 100px;
     }
 </style>
 </head>
 <body>
-<div class="calculator">
-    <div class="input-group">
-        <label for="area">Площадь:</label>
-        <input type="number" id="area">
-    </div>
-    <div class="buttons">
-        <button onclick="add()">+</button>
-        <button onclick="subtract()">-</button>
-    </div>
-    <div>
-        <input type="radio" id="lessThan30" name="condition" onchange="calculate()">Менее 30
-        <input type="radio" id="between30And50" name="condition" onchange="calculate()">От 30 до 50
-        <input type="radio" id="greaterThan50" name="condition" onchange="calculate()">Более 50
-    </div>
-    <div id="result">Итого:</div>
-</div>
-<script>
-    function calculate() {
-        var area = parseFloat(document.getElementById('area').value);
-        var resultElement = document.getElementById('result');
-        var result = 0;
 
-        if (document.getElementById('lessThan30').checked && area < 30) {
-            result = area;
-        } else if (document.getElementById('between30And50').checked && area >= 30 && area <= 50) {
-            result = area * 1.1;
-        } else if (document.getElementById('greaterThan50').checked && area > 50) {
-            result = area * 1.2;
+<div class="calculator">
+    <label for="area">Площадь:</label>
+    <input type="number" id="area" value="1">
+    <button onclick="decrement()">-</button>
+    <button onclick="increment()">+</button>
+    <br>
+    <br>
+    <label>Выберите тип:</label><br>
+    <input type="radio" name="type" value="economy">Эконом (работы)<br>
+    <input type="radio" name="type" value="standard" onchange="calculateTotal()">Стандарт (работы, черновые и чистовые материалы)<br>
+    <input type="radio" name="type" value="comfort" onchange="calculateTotal()">Комфорт (работы, черновые и чистовые материалы)<br>
+    <input type="radio" name="type" value="technical" onchange="calculateTotal()">Технический дизайн-проект<br>
+    <input type="radio" name="type" value="full" onchange="calculateTotal()">Полноценный дизайн-проект<br>
+    <br>
+    <label for="total">Итого:</label>
+    <span id="total">0 рублей</span>
+</div>
+
+<script>
+    function decrement() {
+        var areaInput = document.getElementById("area");
+        areaInput.stepDown();
+        calculateTotal();
+    }
+
+    function increment() {
+        var areaInput = document.getElementById("area");
+        areaInput.stepUp();
+        calculateTotal();
+    }
+
+    function calculateTotal() {
+        var area = parseFloat(document.getElementById("area").value);
+        var type = document.querySelector('input[name="type"]:checked').value;
+        var total = 0;
+
+        if (type === "economy") {
+            total = area * 100; // Примерная стоимость для типа "Эконом"
+        } else if (type === "standard") {
+            if (area < 30) {
+                total = area * 120; // Коэффициент 1
+            } else if (area >= 30 && area < 50) {
+                total = area * 120 * 0.9; // Коэффициент 0.9
+            } else {
+                total = area * 120 * 0.8; // Коэффициент 0.8
+            }
+        } else if (type === "comfort") {
+            if (area < 30) {
+                total = area * 150; // Коэффициент 1
+            } else if (area >= 30 && area < 50) {
+                total = area * 150 * 0.9; // Коэффициент 0.9
+            } else {
+                total = area * 150 * 0.8; // Коэффициент 0.8
+            }
+        } else if (type === "technical") {
+            total = area * 200; // Примерная стоимость для типа "Технический дизайн-проект"
+        } else if (type === "full") {
+            total = area * 250; // Примерная стоимость для типа "Полноценный дизайн-проект"
         }
 
-        resultElement.textContent = 'Итого: ' + result.toFixed(2);
+        document.getElementById("total").textContent = total + " рублей";
     }
 
-    function add() {
-        var areaInput = document.getElementById('area');
-        areaInput.value = parseFloat(areaInput.value) + 1;
-        calculate();
-    }
-
-    function subtract() {
-        var areaInput = document.getElementById('area');
-        areaInput.value = parseFloat(areaInput.value) - 1;
-        calculate();
-    }
+    // Вызываем calculateTotal() при загрузке страницы, чтобы отобразить начальное значение
+    calculateTotal();
 </script>
+
 </body>
 </html>
