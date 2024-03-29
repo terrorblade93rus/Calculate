@@ -5,14 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Калькулятор</title>
 <style>
-    /* простой стиль для визуализации */
+    /* Обновленный стиль */
     .calculator {
-        width: 300px;
+        width: 400px;
         margin: 0 auto;
         font-family: Arial, sans-serif;
+        font-size: 16px;
     }
     input[type="number"] {
         width: 100px;
+        font-size: 16px;
+    }
+    label {
+        white-space: nowrap;
     }
 </style>
 </head>
@@ -24,13 +29,12 @@
     <button onclick="decrement()">-</button>
     <button onclick="increment()">+</button>
     <br>
-    <br>
-    <label>Выберите тип:</label><br>
-    <input type="radio" name="type" value="economy">Эконом (работы)<br>
-    <input type="radio" name="type" value="standard" onchange="calculateTotal()">Стандарт (работы, черновые и чистовые материалы)<br>
-    <input type="radio" name="type" value="comfort" onchange="calculateTotal()">Комфорт (работы, черновые и чистовые материалы)<br>
-    <input type="radio" name="type" value="technical" onchange="calculateTotal()">Технический дизайн-проект<br>
-    <input type="radio" name="type" value="full" onchange="calculateTotal()">Полноценный дизайн-проект<br>
+    <label>Выберите тип:</label>
+    <input type="radio" name="type" value="economy">Эконом (работы)
+    <input type="radio" name="type" value="standard" onchange="calculateTotal()">Стандарт (работы, черновые и чистовые материалы)
+    <input type="radio" name="type" value="comfort" onchange="calculateTotal()">Комфорт (работы, черновые и чистовые материалы)
+    <input type="radio" name="type" value="technical" onchange="calculateTotal()">Технический дизайн-проект
+    <input type="radio" name="type" value="full" onchange="calculateTotal()">Полноценный дизайн-проект
     <br>
     <label for="total">Итого:</label>
     <span id="total">0 рублей</span>
