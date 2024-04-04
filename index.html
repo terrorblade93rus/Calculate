@@ -5,68 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Калькулятор</title>
 <style>
-    /* Обновленный стиль */    
+    /* Стили для калькулятора */
     .calculator {
-        width: 500px;
-        margin: 0 auto;
-        font-family: Arial, sans-serif;
-        font-size: 16px;
+        width: 500px; /* Ширина калькулятора */
+        margin: 0 auto; /* Выравнивание по центру */
+        font-family: Arial, sans-serif; /* Шрифт */
+        font-size: 16px; /* Размер шрифта */
     }
-    input[type="text"] {
-        width: 100px;
-        font-size: 16px;
-    }
+    /*input[type="text"] {*/
+       /* width: 100px; /* Ширина поля ввода */
+       /* font-size: 16px; /* Размер шрифта в поле ввода */
+    /*}*/
     label {
-        white-space: nowrap;
-        display: block;
-        line-height: 1.5; /* межстрочный интервал */
+        white-space: nowrap; /* Запрет переноса строк в метках */
+        display: block; /* Отображение меток на отдельных строках */
+        line-height: 1.5; /* Межстрочное расстояние для меток */
     }
 </style>
 </head>
 <body>
 
 <div class="calculator">
-    <label for="area">Введите площадь Вашей квартиры:</label>
-    <input type="text" id="area" value="" oninput="calculateTotal()">
+    <!-- Поле ввода для площади -->
+    <label for="area">Площадь Вашей квартиры:</label><br>
+    <input type="text" id="area" value="1" oninput="calculateTotal()">
     <br><br>
+    <!-- Выбор типа -->
     <label>Выберите тариф:</label>
     <br>
-    <input type="radio" name="type" value="economy" onchange="calculateTotal()">Эконом (работы)<br>
+    <br>
+    <input type="radio" name="type" value="economy">Эконом (работы)<br>
     <input type="radio" name="type" value="standard" onchange="calculateTotal()">Стандарт (работы, черновые и чистовые материалы)<br>
     <input type="radio" name="type" value="comfort" checked onchange="calculateTotal()">Комфорт (работы, черновые и чистовые материалы)<br>
     <input type="radio" name="type" value="technical" onchange="calculateTotal()">Технический дизайн-проект<br>
     <input type="radio" name="type" value="full" onchange="calculateTotal()">Полноценный дизайн-проект<br>
     <br>
-    <label for="total">Итого:</label>
+    <!-- Вывод суммы -->
+    <label for="total">Итого:</label><br>
     <span id="total">0 рублей</span>
 </div>
 
 <script>
+    // Функция для расчета общей суммы
     function calculateTotal() {
+        // Получение значения площади из поля ввода
         var area = parseFloat(document.getElementById("area").value);
+        // Проверка, является ли значение числом
         if (isNaN(area)) {
             area = 0; // Установка значения по умолчанию, если поле пустое или содержит нечисловое значение
         }
+        // Получение выбранного типа из радиокнопок
         var type = document.querySelector('input[name="type"]:checked').value;
+        // Инициализация общей суммы
         var total = 0;
 
+        // Расчет общей суммы в зависимости от выбранного типа и площади
         if (type === "economy") {
             total = area * 10690; // Примерная стоимость для типа "Эконом"
         } else if (type === "standard") {
-            if (area < 30) {
-                total = area * 17670; // Коэффициент 1
-            } else if (area >= 30 && area < 50) {
-                total = area * 17670 * 0.9; // Коэффициент 0.9
+            if (area <= 29) {
+                total = area * 22490; // шаг 18-29 м2
+            } else if (area >= 30 && area <= 40) {
+                total = area * 20490; // шаг 30-40 м2
+            } else if (area >= 41 && area <= 56) {
+                total = area * 18490; // шаг 41-56 м2
+            } else if (area >= 57 && area <= 75) {
+                total = area * 17490; // шаг 57-75 м2
             } else {
-                total = area * 17670 * 0.8; // Коэффициент 0.8
+                total = area * 16490; // шаг от 76 м2
             }
         } else if (type === "comfort") {
-            if (area < 30) {
-                total = area * 21960; // Коэффициент 1
-            } else if (area >= 30 && area < 50) {
-                total = area * 21960 * 0.9; // Коэффициент 0.9
+            if (area <= 29) {
+                total = area * 24490; // шиг 18-29 м2
+            } else if (area >= 30 && area <= 40) {
+                total = area * 22490; // шаг 30-40 м2
+            } else if (area >= 41 && area <= 56) {
+                total = area * 20490; // шаг 41-56 м2
+            } else if (area >= 57 && area <= 75) {
+                total = area * 19490; // шаг 57-75 м2
             } else {
-                total = area * 21960 * 0.8; // Коэффициент 0.8
+                total = area * 18490; // шаг от 76 м2
             }
         } else if (type === "technical") {
             total = area * 2100; // Примерная стоимость для типа "Технический дизайн-проект"
@@ -74,10 +92,11 @@
             total = area * 2750; // Примерная стоимость для типа "Полноценный дизайн-проект"
         }
 
+        // Вывод общей суммы на страницу
         document.getElementById("total").textContent = total + " рублей";
     }
 
-    // Вызываем calculateTotal() при загрузке страницы, чтобы отобразить начальное значение
+    // Вызов функции calculateTotal() при загрузке страницы, чтобы отобразить начальное значение
     calculateTotal();
 </script>
 
