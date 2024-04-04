@@ -28,13 +28,13 @@
 <div class="calculator">
     <!-- Поле ввода для площади -->
     <label for="area">Площадь Вашей квартиры:</label><br>
-    <input type="text" id="area" value="1" oninput="calculateTotal()">
+    <input type="text" id="area" value="" oninput="calculateTotal()">
     <br><br>
     <!-- Выбор типа -->
     <label>Выберите тариф:</label>
     <br>
     <br>
-    <input type="radio" name="type" value="economy">Эконом (работы)<br>
+    <input type="radio" name="type" value="economy" onchange="calculateTotal()">Эконом (работы)<br>
     <input type="radio" name="type" value="standard" onchange="calculateTotal()">Стандарт (работы, черновые и чистовые материалы)<br>
     <input type="radio" name="type" value="comfort" checked onchange="calculateTotal()">Комфорт (работы, черновые и чистовые материалы)<br>
     <input type="radio" name="type" value="technical" onchange="calculateTotal()">Технический дизайн-проект<br>
