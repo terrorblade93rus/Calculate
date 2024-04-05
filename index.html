@@ -57,7 +57,7 @@
             area = 0; // Установка значения по умолчанию, если поле пустое или содержит нечисловое значение
         }
         // Получение выбранного типа из радиокнопок
-        var type = document.querySelector('input[name="type"]:checked').value;
+        var type = document.querySelector('input[name="type"]:checked').value.replace(',', '.');
         // Инициализация общей суммы
         var total = 0;
 
@@ -65,25 +65,25 @@
         if (type === "economy") {
             total = area * 10690; // Примерная стоимость для типа "Эконом"
         } else if (type === "standard") {
-            if (area <= 29) {
+            if (area <= 29.9) {
                 total = area * 22490; // шаг 18-29 м2
-            } else if (area >= 30 && area <= 40) {
+            } else if (area >= 30 && area <= 40.9) {
                 total = area * 20490; // шаг 30-40 м2
-            } else if (area >= 41 && area <= 56) {
+            } else if (area >= 41 && area <= 56.9) {
                 total = area * 18490; // шаг 41-56 м2
-            } else if (area >= 57 && area <= 75) {
+            } else if (area >= 57 && area <= 75.9) {
                 total = area * 17490; // шаг 57-75 м2
             } else {
                 total = area * 16490; // шаг от 76 м2
             }
         } else if (type === "comfort") {
-            if (area <= 29) {
+            if (area <= 29.9) {
                 total = area * 24490; // шиг 18-29 м2
-            } else if (area >= 30 && area <= 40) {
+            } else if (area >= 30 && area <= 40.9) {
                 total = area * 22490; // шаг 30-40 м2
-            } else if (area >= 41 && area <= 56) {
+            } else if (area >= 41 && area <= 56.9) {
                 total = area * 20490; // шаг 41-56 м2
-            } else if (area >= 57 && area <= 75) {
+            } else if (area >= 57 && area <= 75.9) {
                 total = area * 19490; // шаг 57-75 м2
             } else {
                 total = area * 18490; // шаг от 76 м2
